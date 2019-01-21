@@ -281,37 +281,34 @@ class FlipClock extends StatelessWidget {
         )
       ]);
     }
-    return Padding(
-      padding: const EdgeInsets.only(top: 180.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: digitList
-          ..addAll([
-            // Minutes
-            _buildSegment(timeStream, (DateTime time) => (countdownMode)? (timeLeft.inMinutes%60) ~/ 10 : (time.minute) ~/10,
-                (DateTime time) => (countdownMode)? (timeLeft.inMinutes%60) % 10 : (time.minute) %10, startTime, "minutes"),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: digitList
+        ..addAll([
+          // Minutes
+          _buildSegment(timeStream, (DateTime time) => (countdownMode)? (timeLeft.inMinutes%60) ~/ 10 : (time.minute) ~/10,
+              (DateTime time) => (countdownMode)? (timeLeft.inMinutes%60) % 10 : (time.minute) %10, startTime, "minutes"),
 
-            Column(
+          Column(
             children: <Widget>[
               Padding(
                 padding: spacing,
                 child: _separator,
               ),
               (_showDays)
-              ? Container(
+                ? Container(
                 color: Colors.black
               )
-              : Container(
+                : Container(
                 color: Colors.transparent,
               )
             ],
           ),
 
-            // Seconds
-            _buildSegment(timeStream, (DateTime time) => (countdownMode)? (timeLeft.inSeconds%60) ~/ 10 : (time.second) ~/10,
-                (DateTime time) => (countdownMode)? (timeLeft.inSeconds%60) % 10 : (time.second) %10, startTime, "seconds")
-          ]),
-      ),
+          // Seconds
+          _buildSegment(timeStream, (DateTime time) => (countdownMode)? (timeLeft.inSeconds%60) ~/ 10 : (time.second) ~/10,
+              (DateTime time) => (countdownMode)? (timeLeft.inSeconds%60) % 10 : (time.second) %10, startTime, "seconds")
+        ]),
     );
   }
 
